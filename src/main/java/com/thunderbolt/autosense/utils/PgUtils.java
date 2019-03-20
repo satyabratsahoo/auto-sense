@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class PgUtils extends PgVariables {
@@ -24,21 +26,14 @@ public class PgUtils extends PgVariables {
                  Properties connProp = new Properties();
        try {
 
-
-           try (InputStream fis = new FileInputStream(ClassLoader.getSystemResource("autosense_db_config.properties").getFile())) {
-               connProp.load(fis);
-           }
-           String hostname = connProp.getProperty("hostname");
-           String port = connProp.getProperty("port");
-           String dbname = connProp.getProperty("dbname");
-           String dbuser = connProp.getProperty("root_user");
-           String dbpass = connProp.getProperty("root_password");
+           Map<String,String> dbConn =DbProp.getProp();
 
            Class.forName("org.postgresql.Driver");
 
            try {
                connection = DriverManager.getConnection(
-                       "jdbc:postgresql://" + hostname + ":" + port + "/" + dbname, dbuser, dbpass);
+                       "jdbc:postgresql://" + dbConn.get("hostname") + ":" +  dbConn.get("port") + "/"
+                               + dbConn.get("database"), dbConn.get("username"), dbConn.get("password"));
 
                if (connection != null) {
                    logger.info("Connected to the Database");
@@ -60,16 +55,16 @@ public class PgUtils extends PgVariables {
        }
     }
 
-    public static String executeQuery(String username,String password,String clientIp){
+    public static String executeQuery(String procName,Map<Integer,String> pMap){
         Connection connection = null;
         try {
 
             connection=initConnection();
-            CallableStatement callProc = connection.prepareCall("{? = call appengine.f_user_login( ?,?,? ) }");
+            CallableStatement callProc =
+                    ProcUtil.buildCallableProc(procName, connection,pMap);
+
             callProc.registerOutParameter(1, Types.VARCHAR);
-            callProc.setString(2, username);
-            callProc.setString(3, password);
-            callProc.setString(4, clientIp);
+
             callProc.execute();
             String result = callProc.getString(1);
             callProc.close();
