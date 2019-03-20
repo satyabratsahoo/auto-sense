@@ -1,4 +1,4 @@
-package com.thunderbolt.autosense.modules.sql;
+package com.thunderbolt.autosense.utils;
 
 
 import com.thunderbolt.autosense.models.PgVariables;
@@ -6,13 +6,11 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Properties;
 
 public class PgUtils extends PgVariables {
     final static Logger logger = Logger.getLogger(PgUtils.class);
-    Properties connProp = new Properties();
-    Connection connection = null;
+
 
     public void pgDisconnect() throws SQLException {
         if (this.getPgConnection() != null) {
@@ -20,11 +18,13 @@ public class PgUtils extends PgVariables {
         }
     }
 
-    public  Connection initConnection()
+    public static Connection initConnection()
              {
-
-
+                 Connection connection = null;
+                 Properties connProp = new Properties();
        try {
+
+
            try (InputStream fis = new FileInputStream(ClassLoader.getSystemResource("autosense_db_config.properties").getFile())) {
                connProp.load(fis);
            }
@@ -44,7 +44,7 @@ public class PgUtils extends PgVariables {
                    logger.info("Connected to the Database");
                    return connection;
                }
-           } catch (Exception e) {
+           } catch (SQLException e) {
                logger.error(e.getMessage());
                return connection;
            }
@@ -60,7 +60,7 @@ public class PgUtils extends PgVariables {
        }
     }
 
-    public String executeQuery(String username,String password,String clientIp){
+    public static String executeQuery(String username,String password,String clientIp){
         Connection connection = null;
         try {
 
@@ -77,10 +77,12 @@ public class PgUtils extends PgVariables {
             return result;
         }
 
-        catch (Exception e){
+        catch (SQLException e){
             //logger.error(e.getMessage());
-            return "{\"message_id\" : 000, \"message_code\" : \"JAVA_ERROR\", \"value\" : \""+ e.getMessage()+"\"}";
+            return "{\"message_id\" : \"000\", \"message_code\" : \"JAVA_DB_READER_ERROR\", \"value\" : \""+ e.getMessage()+"\"}";
         }
+
+
 
     }
 }

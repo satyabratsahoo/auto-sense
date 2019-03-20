@@ -1,13 +1,11 @@
 package com.thunderbolt.autosense.models;
 
 
-import com.thunderbolt.autosense.modules.sql.PgUtils;
+import com.thunderbolt.autosense.utils.PgUtils;
+import com.thunderbolt.autosense.utils.JMap;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.util.Map;
 
 public class TestJSON {
 
@@ -15,11 +13,10 @@ public class TestJSON {
     public static void main(String[] args) throws IOException {
 
         PgUtils pgUtils = new PgUtils();
-  System.out.println(
 
-          UserSession.getSessionDetails(pgUtils.executeQuery("xadmin","Alexashu@3","autosense")));
+          Map<String,String> dMap= JMap.getMap(pgUtils.executeQuery("xadmin","Alexashu@3","autosense"));
 
-
+        System.out.println(dMap);
 
 
     }
