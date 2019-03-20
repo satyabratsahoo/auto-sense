@@ -66,16 +66,16 @@ public class ProcUtil {
 
         for (int i =1;i<=paramLen;i++){
 
-            setCallable(callProc,i+1,procParam.get(i),vMap);
+            setCallable(callProc,i,procParam.get(Integer.toString(i)),vMap);
         }
-
+        System.out.println(vMap);
         return callProc;
     }
 
     private static void setCallable(CallableStatement cs,int index,String type,Map<Integer,String> vMap) throws SQLException {
 
         if (type.equals("String"))
-            cs.setString(index,vMap.get(index));
+        cs.setString(index+1,vMap.get(index));
         else if (type.equals("Integer"))
             cs.setInt(index,Integer.parseInt(vMap.get(index)));
         else

@@ -14,13 +14,13 @@ public class TestJSON {
 
 
     public static void main(String[] args) throws IOException {
-
-
-
         Map<Integer,String> mMap = new HashMap<>();
         mMap.put(1,"xadmin");
         mMap.put(2,"Alexashu@3");
         mMap.put(3,"localhost");
+
+
+
 
         //System.out.println(mMap.get(1));
         System.out.println(PgUtils.executeQuery("appengine.f_user_login",mMap));
