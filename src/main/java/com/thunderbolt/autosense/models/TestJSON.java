@@ -1,32 +1,48 @@
 package com.thunderbolt.autosense.models;
 
 
-import com.thunderbolt.autosense.utils.PgUtils;
-import com.thunderbolt.autosense.utils.JMap;
-import com.thunderbolt.autosense.utils.ProcUtil;
-
-import javax.xml.crypto.dsig.keyinfo.PGPData;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class TestJSON {
 
 
-    public static void main(String[] args) throws IOException {
-        Map<Integer,String> mMap = new HashMap<>();
-        mMap.put(1,"xadmin");
-        mMap.put(2,"Alexashu@3");
-        mMap.put(3,"localhost");
+    public static void main(String[] args) throws Exception {
 
+        String host="autosense.com";
+        final String user="debans@autosense.com";//change accordingly
+        final String password="admisssn";//change accordingly
 
+        String to="alex@autosense.com";//change accordingly
 
+        //Get the session object
+        Properties props = new Properties();
+        props.put("mail.smtp.host",host);
+        props.put("mail.smtp.port","25");
+        //props.put("mail.smtp.auth", "true");
 
-        //System.out.println(mMap.get(1));
-        System.out.println(PgUtils.executeQuery("appengine.f_user_login",mMap));
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(user,password);
+                    }
+                });
 
+        //Compose the message
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            message.setSubject("javatpoint");
+            message.setText("This is simple program of sending email using JavaMail API");
 
+            //send the message
+            Transport.send(message);
 
+            System.out.println("message sent successfully...");
 
+        } catch (MessagingException e) {e.printStackTrace();}
     }
 }

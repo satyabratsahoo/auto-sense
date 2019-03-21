@@ -43,8 +43,11 @@ public class ProcUtil {
 
     }
 
-    public static CallableStatement buildCallableProc(String procName, Connection conn,Map<Integer,String> vMap) throws SQLException {
+    public static CallableStatement buildCallableProc(String procName, Connection conn,Map<Integer,String> vMap) throws Exception {
         Map<String,String> procParam = getProcParam(procName);
+
+        if(procParam.size()!=vMap.size())
+            throw new Exception("Mapping does not match");
 
         //Build Question String
         String parameters = "";

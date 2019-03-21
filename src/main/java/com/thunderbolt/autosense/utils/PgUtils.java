@@ -55,7 +55,7 @@ public class PgUtils extends PgVariables {
        }
     }
 
-    public static String executeQuery(String procName,Map<Integer,String> pMap){
+    public static String executeQuery(String procName,Map<Integer,String> pMap) throws Exception {
         Connection connection = null;
         try {
 

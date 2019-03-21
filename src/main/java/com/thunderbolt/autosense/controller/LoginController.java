@@ -1,6 +1,7 @@
 package com.thunderbolt.autosense.controller;
 
 
+import com.thunderbolt.autosense.models.RedirectModelView;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,10 @@ import java.util.HashMap;
 public class LoginController {
     final static Logger logger = Logger.getLogger(LoginController.class);
 
-    @RequestMapping(value="/",method = RequestMethod.GET)
+    @RequestMapping(value={"/","/*"},method = RequestMethod.GET)
     public ModelAndView homePage() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("home");
-        return model;
+
+        return RedirectModelView.redirectMV("home");
 
     }
     @RequestMapping(value = "login",method = RequestMethod.POST)
@@ -38,18 +38,8 @@ public class LoginController {
         return model;
     }
 
-        @RequestMapping(value="/asdasd",method = RequestMethod.GET)
-        public ModelAndView cookieTester(@CookieValue(value = "hitCounter",defaultValue = "0")Long hitCounter
-                ,HttpServletResponse response) {
 
-        hitCounter++;
-        Cookie cookie = new Cookie("hitCounter",hitCounter.toString());
-        response.addCookie(cookie);
-            ModelAndView model = new ModelAndView();
-            model.setViewName("counter");
-            System.out.println("cookie called");
-            return model;
     }
 
 
-}
+
