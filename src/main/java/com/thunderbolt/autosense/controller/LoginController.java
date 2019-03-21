@@ -34,7 +34,7 @@ public class LoginController {
         model.addObject("message", "Invalid Credentials");
         model.addObject("message_icon", "fa fa-exclamation-circle");
 
-        model.setViewName("home");
+        model.setViewName("ata");
         return model;
     }
 
