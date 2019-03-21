@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/kendo/kendo.default.min.css" rel="stylesheet" />
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/kendo/kendo.all.min.js"></script>
+
 </head>
 <body>
 <input id="datepicker" />
