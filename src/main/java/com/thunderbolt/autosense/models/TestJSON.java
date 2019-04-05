@@ -3,6 +3,7 @@ package com.thunderbolt.autosense.models;
 
 import com.thunderbolt.autosense.utils.ErrorUtil;
 import com.thunderbolt.autosense.utils.PgUtils;
+import com.thunderbolt.autosense.utils.UserLoginUtils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -16,15 +17,8 @@ public class TestJSON {
 
     public static void main(String[] args) throws Exception {
 
-        Map<Integer,String> map = new HashMap<>();
-        map.put(1,"xadmin");
-        map.put(2,"Alexashu@3");
-        map.put(3,"localhost");
+        UserLoginUtils.userLogin("xadmin","Alexashu@34","dataloc");
 
-        System.out.println(ErrorUtil.returns("asd","asda","asd"));
-        System.out.println(
-                PgUtils.executeQuery("appengine.f_user_login",map)
 
-        );
     }
 }

@@ -1,12 +1,12 @@
 
-package com.thunderbolt.autosense.models;
+package com.thunderbolt.autosense.beans;
 
 public class ErrorBean {
 
 
     private String message_id;
     private String message_code;
-    private String value;
+    private String error_message;
 
     public String getMessage_id() {
         return message_id;
@@ -24,12 +24,11 @@ public class ErrorBean {
         this.message_code = message_code;
     }
 
-    public String getValue() {
-        return value;
+    public String getError_message() {
+        return error_message;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setError_message(String error_message) {
+        this.error_message = error_message;
     }
-
 }

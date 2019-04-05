@@ -22,8 +22,8 @@ public class PgUtils extends PgVariables {
 
     public static Connection initConnection()
              {
-                 Connection connection = null;
-                 Properties connProp = new Properties();
+                 Connection connection=null;
+
        try {
 
            Map<String,String> dbConn =DbProp.getProp();
@@ -56,7 +56,7 @@ public class PgUtils extends PgVariables {
     }
 
     public static String executeQuery(String procName,Map<Integer,String> pMap)  {
-        Connection connection = null;
+        Connection connection;
         try {
 
             connection=initConnection();
@@ -73,14 +73,14 @@ public class PgUtils extends PgVariables {
         }
 
         catch (SQLException e){
-            //logger.error(e.getMessage());
+
             return ErrorUtil.returns("000","JAVA_DB_READER_ERROR",e.getMessage());
 
 
         }
 
         catch (Exception e){
-            //logger.error(e.getMessage());
+
             return ErrorUtil.returns("000","JAVA_DB_READER_ERROR",e.getMessage());
         }
 

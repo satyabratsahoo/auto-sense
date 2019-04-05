@@ -71,7 +71,7 @@ public class ProcUtil {
 
             setCallable(callProc,i,procParam.get(Integer.toString(i)),vMap);
         }
-        System.out.println(vMap);
+        //System.out.println(vMap);
         return callProc;
     }
 
