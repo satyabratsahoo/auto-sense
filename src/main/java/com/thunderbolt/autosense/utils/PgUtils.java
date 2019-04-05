@@ -55,7 +55,7 @@ public class PgUtils extends PgVariables {
        }
     }
 
-    public static String executeQuery(String procName,Map<Integer,String> pMap) throws Exception {
+    public static String executeQuery(String procName,Map<Integer,String> pMap)  {
         Connection connection = null;
         try {
 
@@ -74,10 +74,15 @@ public class PgUtils extends PgVariables {
 
         catch (SQLException e){
             //logger.error(e.getMessage());
-            return "{\"message_id\" : \"000\", \"message_code\" : \"JAVA_DB_READER_ERROR\", \"value\" : \""+ e.getMessage()+"\"}";
+            return ErrorUtil.returns("000","JAVA_DB_READER_ERROR",e.getMessage());
+
+
         }
 
-
+        catch (Exception e){
+            //logger.error(e.getMessage());
+            return ErrorUtil.returns("000","JAVA_DB_READER_ERROR",e.getMessage());
+        }
 
     }
 }
