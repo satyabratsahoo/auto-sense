@@ -19,7 +19,7 @@ public class ErrorUtil {
         return json;
     }
     catch (JsonProcessingException e){
-        return "{\"message_id\" : \"000\", \"message_code\" : \"JAVA_DB_READER_ERROR\", \"error_message\" : \""+ e.getMessage()+"\"}";
+        return "{\"message_id\" : \"000\", \"message_code\" : \"JAVA_JSON_ERROR\", \"error_message\" : \""+ e.getMessage()+"\"}";
     }
 
     }

@@ -16,8 +16,10 @@ public class ProcUtil {
         Properties connProp = new Properties();
         try {
 
+//            InputStream fis = new FileInputStream(
+//                    ClassLoader.getSystemResource("callableProcedure.properties").getFile());
             InputStream fis = new FileInputStream(
-                    ClassLoader.getSystemResource("callableProcedure.properties").getFile());
+                    "C:\\AutoSense\\JavaDev\\auto-sense\\src\\main\\resources\\callableProcedure.properties");
             connProp.load(fis);
 
             String procParam = connProp.getProperty(procName);

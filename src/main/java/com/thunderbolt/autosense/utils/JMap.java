@@ -22,7 +22,7 @@ public  class JMap {
         catch (Exception e){
             jMapper.put("message_id","000");
             jMapper.put("message_code","ERROR");
-            jMapper.put("error",e.getMessage());
+            jMapper.put("error_message",e.getMessage());
             return jMapper;
 
         }

@@ -17,7 +17,7 @@ public class TestJSON {
 
     public static void main(String[] args) throws Exception {
 
-        UserLoginUtils.userLogin("xadmin","Alexashu@34","dataloc");
+//        UserLoginUtils.userLogin("xadmin","Alexashu@3","dataloc").getValue().getEmail_id();
 
 
     }

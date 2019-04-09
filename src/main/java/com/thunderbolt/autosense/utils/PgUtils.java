@@ -45,7 +45,8 @@ public class PgUtils extends PgVariables {
            }
        }
        catch (Exception e){
-           logger.error(e.toString());
+           logger.error(e.getMessage());
+           e.printStackTrace();
            return connection;
        }
 
