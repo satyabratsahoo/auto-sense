@@ -19,15 +19,7 @@
         </property>
     </bean>
 
-    <bean id="dbProperties"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:autosense_db_config.properties</value>
-                <value>classpath:callableProcedure.properties</value>
-            </list>
-        </property>
-    </bean>
+    
 
     <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926"/>

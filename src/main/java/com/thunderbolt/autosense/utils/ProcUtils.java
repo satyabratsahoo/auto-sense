@@ -1,8 +1,10 @@
 package com.thunderbolt.autosense.utils;
 
-import java.io.FileInputStream;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,17 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class ProcUtil {
+public class ProcUtils {
     public static Map<String,String> getProcParam(String procName){
         Map<String,String> dbMap = new HashMap<>();
         Properties connProp = new Properties();
         try {
 
-//            InputStream fis = new FileInputStream(
-//                    ClassLoader.getSystemResource("callableProcedure.properties").getFile());
-            InputStream fis = new FileInputStream(
-                    "C:\\AutoSense\\JavaDev\\auto-sense\\src\\main\\resources\\callableProcedure.properties");
-            connProp.load(fis);
+
+            Resource resource = new ClassPathResource("/callableProcedure.properties");
+            connProp = PropertiesLoaderUtils.loadProperties(resource);
 
             String procParam = connProp.getProperty(procName);
             String [] paramList =procParam.split("\\|");

@@ -1,27 +1,30 @@
 package com.thunderbolt.autosense.utils;
 
 import org.apache.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
 
-public class DbProp {
+public class DbPropReader {
     final static Logger logger = Logger.getLogger(PgUtils.class);
     public static Map<String,String> getProp(){
        Map<String,String> dbMap = new HashMap<>();
         Properties connProp = new Properties();
         try {
 
-//            InputStream fis = new FileInputStream(
-//                    ClassLoader.getSystemResource("autosense_db_config.properties").getFile());
-            InputStream fis = new FileInputStream("autosense_db_config.properties");
-                connProp.load(fis);
+
+
+            Resource resource = new ClassPathResource("/autosense_db_config.properties");
+            connProp = PropertiesLoaderUtils.loadProperties(resource);
+
+//            connProp.load(props);
 
                 for(Entry<Object,Object> eSet:connProp.entrySet()){
                     dbMap.put(eSet.getKey().toString(),eSet.getValue().toString());

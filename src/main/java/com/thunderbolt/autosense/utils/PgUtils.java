@@ -4,11 +4,8 @@ package com.thunderbolt.autosense.utils;
 import com.thunderbolt.autosense.models.PgVariables;
 import org.apache.log4j.Logger;
 
-import java.io.*;
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class PgUtils extends PgVariables {
     final static Logger logger = Logger.getLogger(PgUtils.class);
@@ -26,7 +23,7 @@ public class PgUtils extends PgVariables {
 
        try {
 
-           Map<String,String> dbConn =DbProp.getProp();
+           Map<String,String> dbConn = DbPropReader.getProp();
 
            Class.forName("org.postgresql.Driver");
 
@@ -36,7 +33,7 @@ public class PgUtils extends PgVariables {
                                + dbConn.get("database"), dbConn.get("username"), dbConn.get("password"));
 
                if (connection != null) {
-                   logger.info("Connected to the Database");
+//                   logger.info("Connected to the Database");
                    return connection;
                }
            } catch (SQLException e) {
@@ -62,7 +59,7 @@ public class PgUtils extends PgVariables {
 
             connection=initConnection();
             CallableStatement callProc =
-                    ProcUtil.buildCallableProc(procName, connection,pMap);
+                    ProcUtils.buildCallableProc(procName, connection,pMap);
 
             callProc.registerOutParameter(1, Types.VARCHAR);
 

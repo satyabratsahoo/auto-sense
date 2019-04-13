@@ -15,7 +15,7 @@
     <li>${userDetails.message_id}</li>
     <li>${userDetails.message_code}</li>
     <li>${userDetails.value.email_id}</li>
-    <li>dsad</li>
+    <li>${userDetails.value.first_name}</li>
 </ul>
 </body>
 </html>
